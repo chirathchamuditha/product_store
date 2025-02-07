@@ -4,8 +4,16 @@ import { FaPlus } from "react-icons/fa";
 import { useProductStore } from '../store/product';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import notificationSound from '../assets/sound/n.mp3';
 
 const CreatePage = () => {
+
+    const notification = new Audio(notificationSound);
+
+    const playsound = () => {
+        notification.currentTime = 0;
+        notification.play().catch(err => console.log(err));
+    }
 
     const [newProduct, setNewProduct] = useState({
         name: "",
@@ -26,6 +34,7 @@ const CreatePage = () => {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
+                onOpen: playsound,
             });
         } else {
             toast.success(message, {
@@ -36,6 +45,7 @@ const CreatePage = () => {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
+                onOpen: playsound,
             });
         }
 
